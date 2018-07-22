@@ -148,13 +148,13 @@ header h1{
     font-size: 25px;
 }
 
-button{
+.restart button{
     width: 65px;
     box-shadow: 5px 5px brown;
     transform: translateY(4px);
 }
 
-button .fa .fa-repeat{
+button .fa-repeat{
     font-size: 25px;
 }
 
@@ -168,13 +168,56 @@ button .fa .fa-repeat{
     float: right;
 }
 
+.timeCounter{
+    margin-top: 20px;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.startCountDown{
+    margin-top: 20px;
+}
+
+.startCountDown button{
+    box-shadow: 5px 5px lightseagreen;
+    transform: translateY(4px);
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
 /* modal */
 
 .modal-title{
     font-size: 1.8em;
-    color: red;
+    color: lightseagreen;
+    text-transform: uppercase;
 }
 .item-menu-details{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.score-card-content{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+#score-card-sec{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.score-card-text{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+#score-card-moves{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+#score-card-star{
     font-size: 1.2em;
     font-weight: 600;
 }

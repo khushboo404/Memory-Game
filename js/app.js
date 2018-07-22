@@ -23,6 +23,18 @@
 
  let timeCal;
 
+ let downloadTimer;
+
+ let secCount;
+
+ let flag = false;
+
+ let secCounter;
+
+ let moveCounter;
+
+ let starCounter;
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -63,18 +75,16 @@ function initMoves(){
 function reset(){
     $(".deck").html("");
     $(".stars").html("");
+    $(".moves").html(`<span class="moves" id="points">0</span>`);
+    $(".star-points").html(`<span class="star-points" id="starPoints">3</span>`);
+    $(".time-seconds").html(`<span class="time-seconds" id="timeSec">0</span>`);
     openCards = [];
     matchCount = 0;
+    moveCount = 0;
+    clearInterval(downloadTimer);
+    flag = false;
     init();
-
 }
-
-
-// $(".restart").on("click", function(){
-//     reset();
-//     init();
-
-// });
 
  function init(){
      
@@ -82,6 +92,10 @@ function reset(){
      initMoves();
  
      $(".card").on("click", function(){
+         if(flag == false){
+             flag = true;
+             calculateSeconds();
+         }
          
          if($(this).attr("class").search("show") !== -1 || $(this).attr("class").search("match") !== -1){
              return;
@@ -124,13 +138,20 @@ function reset(){
              moveCount+=1;
              let movePoints = document.getElementById("points");
              movePoints.innerHTML = moveCount;
-                if(moveCount === 10 || moveCount === 20){
+                if(moveCount === 16 || moveCount === 20){
                     reducePoints();
                 }
          }
 
         function congrats(){
+            secCounter = document.getElementById("score-card-sec");
+            $("#score-card-sec").html(secCount);
+            moveCounter = document.getElementById("score-card-moves");
+            $("#score-card-moves").html(moveCount);
+            starCounter = document.getElementById("score-card-star");
+            $("#score-card-star").html(starPoints);
             $('#congratsModal').modal('toggle');
+            stopTimer();
         }
 
         function reducePoints(){
@@ -151,6 +172,22 @@ function reset(){
 
      });
  }
+
+ function calculateSeconds(){
+    let timeStart = 0;
+    downloadTimer = setInterval(function(){
+    secCount = document.getElementById("timeSec").value = 0 + ++timeStart;
+     if(timeStart >= 0)
+       $(".time-seconds").html(secCount);
+   },1000);
+ }
+
+ function stopTimer(){
+    clearInterval(downloadTimer);
+ }
+
+
+
 
 //  window.onload = function () {
   
