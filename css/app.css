@@ -1,193 +1,261 @@
- /*
- * Create a list that holds all of your cards
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry3.jpg'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {   
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+header h1 {
+    margin-bottom: 30px;
+    font-family: Impact, Charcoal, sans-serif;
+    margin-top: 20px;
+}
+
+.row .col-md-4 {
+    widows: 30%;
+}
+
+.row .col-md-4 {
+    widows: 70%;
+}
+
+/*
+ * Styles for the deck of cards
  */
 
- const cards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
-
- let openCards = [];
-
- let matchCount = 0;
-
- let moveCount = 0;
-
- let timeCount = 0;
-
- let downloadTimer;
-
- let secCount;
-
- let flag = false;
-
- let secCounter;
-
- let moveCounter;
-
- let starCounter;
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+.deck {
+    width: 660px;
+    min-height: 600px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
 }
 
-// loop through each card and create its HTML
-
-function makeGrid(){
-
-    shuffle(cards.concat(cards)).forEach(function(card){
-        $(".deck").append(
-            `<li class="card">
-                <i class="fa ${card}"></i>
-            </li>`
-        )
-    });
-
+.deck .card {
+    height: 120px;
+    width: 120px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
-// loop through each stars and append in HTML
-
-function initMoves(){
-
-    for(let i=0; i<3; i++){
-        $(".stars").append(
-            `<li><i class="fa fa-star"></i></li>`
-        )
-    }
-
+.deck .card.open {
+    transform: rotateY(0);
+    background: #02b3e4;
+    cursor: default;
 }
 
-// Reset Function - Reset HTML
-
-function reset(){
-    $(".deck").html("");
-    $(".stars").html("");
-    $(".moves").html(`<span class="moves" id="points">0</span>`);
-    $(".star-points").html(`<span>3</span>`);
-    $(".time-seconds").html(`<span class="time-seconds" id="timeSec">0</span>`);
-    openCards = [];
-    matchCount = 0;
-    moveCount = 0;
-    clearInterval(downloadTimer);
-    flag = false;
-    init();
+.deck .card.show {
+    font-size: 33px;
 }
 
-// Logic for Deck match|Unmatch
+.deck .card.match {
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+}
 
- function init(){
-     
-     makeGrid();
-     initMoves();
- 
-     $(".card").on("click", function(){
-         if(flag == false){
-             flag = true;
-             calculateSeconds();
-         }
-         
-         if($(this).attr("class").search("show") !== -1 || $(this).attr("class").search("match") !== -1){
-             return;
-         }
-         
-         if(openCards.length < 2){
-             $(this).toggleClass("show");
- 
-             openCards.push($(this));
-         }
- 
-         if(openCards.length == 2){
-             if(openCards[0][0].firstElementChild.className == openCards[1][0].firstElementChild.className){
-                 matchCount++;
- 
-                 openCards.forEach(function(card){
-                     card.toggleClass("animated jello");
-                     setTimeout(function(){
-                         card.toggleClass("show match animated jello");
-                     },600)
-                 });
- 
-             }else{
-                 openCards.forEach(function(card){
-                     card.toggleClass("redEffect animated swing");
-                     setTimeout(function(){
-                         card.toggleClass("redEffect show animated swing");
-                     }, 600);
-                 });
-             }
-             openCards = [];
-             calculateMove();
-         }
-         if(matchCount == 8){
-            congrats();
-         }
+/*
+ * Styles for the Score Panel
+ */
 
-        //  Calculate Move Function
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+    float: left;
+    
+}
 
-         function calculateMove(){
-             moveCount+=1;
-             let movePoints = document.getElementById("points");
-             movePoints.innerHTML = moveCount;
-                if(moveCount === 16 || moveCount === 20){
-                    reducePoints();
-                }
-         }
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    font-size: 35px;
+    color: rgb(50, 205, 50)
+}
 
-        //  If all card matches, call Congrats function
+.score-panel h2 {
+    font-family: Impact, Charcoal, sans-serif;
+    text-transform: uppercase;
+}
 
-        function congrats(){
-            secCounter = document.getElementById("score-card-sec");
-            $("#score-card-sec").html(secCount);
-            moveCounter = document.getElementById("score-card-moves");
-            $("#score-card-moves").html(moveCount);
-            starCounter = document.getElementById("score-card-star");
-            $("#score-card-star").html(starPoints);
-            $('#congratsModal').modal('toggle');
-            stopTimer();
-        }
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
 
-        // Reduce points if moves are greater than 16 | 20
+.score-panel .restart {
+    cursor: pointer;
+    font-size: 25px;
+}
 
-        function reducePoints(){
-            let starPoints = document.getElementById("starPoints");
-            let stars = $(".fa-star");
-            $(stars[stars.length-1]).toggleClass("fa-star fa-star-o");
-            starPoints.innerHTML = $(".fa-star").length;
-        }
-     });
- }
+.star-points {
+    font-size: 25px;
+}
 
-//  Function to calculate Time in seconds
+.star-points-text {
+    font-size: 25px;
+}
 
- function calculateSeconds(){
-    let timeStart = 0;
-    downloadTimer = setInterval(function(){
-    secCount = document.getElementById("timeSec").value = 0 + ++timeStart;
-     if(timeStart >= 0)
-       $(".time-seconds").html(secCount);
-   },1000);
- }
+.moves {
+    font-size: 25px;
+}
 
-//  Stop timer when game ends or reset function is called
+.moves-text {
+    font-size: 25px;
+}
 
- function stopTimer(){
-    clearInterval(downloadTimer);
- }
+.restart button {
+    width: 65px;
+    box-shadow: 5px 5px brown;
+    transform: translateY(4px);
+}
 
- function helpUser(){
-    $('#helpModal').modal('toggle');
- }
+button .fa-repeat {
+    font-size: 25px !important;
+}
 
-//  On Load function
+.redEffect {
+    background-color: red !important;
+}
 
- $(function(){
-    init();
- });
+.score-card-content {
+    color: grey;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-weight: 200;
+    font-size: 18px;
+}
+
+#score-card-sec {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.score-card-text {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+#score-card-moves,
+#score-card-star {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/* #score-card-star {
+    font-size: 1.2em;
+    font-weight: 600;
+} */
+
+.help-section {
+    margin-top: 20px;
+}
+
+.help-section button {
+    border-radius: 25%;
+}
+
+button .fa-question-circle {
+    font-size: 40px;
+}
+
+/* Timer */
+
+.timer-section {
+    float: right;
+}
+
+.timeCounter {
+    margin-top: 20px;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.startCountDown {
+    margin-top: 20px;
+}
+
+.startCountDown button {
+    box-shadow: 5px 5px lightseagreen;
+    transform: translateY(4px);
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+/* modal */
+
+.modal-title, .score-card-title {
+    font-size: 1.8em;
+    color: lightseagreen;
+    text-transform: uppercase;
+}
+.item-menu-details {
+    color: grey;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-weight: 200;
+    font-size: 18px;
+}
+
+#helpModal {
+    color: grey;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.aboutGame {
+    font-weight: 200;
+}
+
+.rules {
+    font-weight: 200;
+}
+
+.help-subHeading {
+    font-weight: 600;
+}
