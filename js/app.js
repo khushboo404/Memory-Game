@@ -1,15 +1,6 @@
-/*
+ /*
  * Create a list that holds all of your cards
  */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
 
  const cards = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
 
@@ -20,8 +11,6 @@
  let moveCount = 0;
 
  let timeCount = 0;
-
- let timeCal;
 
  let downloadTimer;
 
@@ -50,6 +39,8 @@ function shuffle(array) {
     return array;
 }
 
+// loop through each card and create its HTML
+
 function makeGrid(){
 
     shuffle(cards.concat(cards)).forEach(function(card){
@@ -62,6 +53,8 @@ function makeGrid(){
 
 }
 
+// loop through each stars and append in HTML
+
 function initMoves(){
 
     for(let i=0; i<3; i++){
@@ -71,6 +64,8 @@ function initMoves(){
     }
 
 }
+
+// Reset Function - Reset HTML
 
 function reset(){
     $(".deck").html("");
@@ -85,6 +80,8 @@ function reset(){
     flag = false;
     init();
 }
+
+// Logic for Deck match|Unmatch
 
  function init(){
      
@@ -120,8 +117,7 @@ function reset(){
  
              }else{
                  openCards.forEach(function(card){
-                    card.toggleClass("red")
-                     card.toggleClass("animated swing");
+                     card.toggleClass("redEffect animated swing");
                      setTimeout(function(){
                          card.toggleClass("show animated swing");
                      }, 600);
@@ -134,6 +130,8 @@ function reset(){
             congrats();
          }
 
+        //  Calculate Move Function
+
          function calculateMove(){
              moveCount+=1;
              let movePoints = document.getElementById("points");
@@ -142,6 +140,8 @@ function reset(){
                     reducePoints();
                 }
          }
+
+        //  If all card matches, call Congrats function
 
         function congrats(){
             secCounter = document.getElementById("score-card-sec");
@@ -154,24 +154,18 @@ function reset(){
             stopTimer();
         }
 
+        // Reduce points if moves are greater than 16 | 20
+
         function reducePoints(){
             let starPoints = document.getElementById("starPoints");
             let stars = $(".fa-star");
             $(stars[stars.length-1]).toggleClass("fa-star fa-star-o");
             starPoints.innerHTML = $(".fa-star").length;
         }
-
-        function calculateTime(){
-            timeCount++;
-            $("#timer").html(timeCount);
-            timeCal = setTimeout(startTimer, 1000);
-
-        }
-
-        
-
      });
  }
+
+//  Function to calculate Time in seconds
 
  function calculateSeconds(){
     let timeStart = 0;
@@ -182,81 +176,17 @@ function reset(){
    },1000);
  }
 
+//  Stop timer when game ends or reset function is called
+
  function stopTimer(){
     clearInterval(downloadTimer);
  }
 
+ function helpUser(){
+    $('#helpModal').modal('toggle');
+ }
 
-
-
-//  window.onload = function () {
-  
-//     var seconds = 00; 
-//     var tens = 00; 
-//     var appendTens = document.getElementById("tens")
-//     var appendSeconds = document.getElementById("seconds")
-//     var buttonStart = document.getElementById('button-start');
-//     var buttonStop = document.getElementById('button-stop');
-//     var Interval ;
-  
-//     buttonStart.onclick = function() {
-      
-//        clearInterval(Interval);
-//        Interval = setInterval(startTimer, 10);
-        
-//     //    console.log(`$tens`);
-//     //    console.log(`$Interval`);
-//     }
-
-//     function freezeTimer() {
-//         console.log(seconds);
-//         clearInterval(Interval);
-//     }
-    
-  
-//     // buttonReset.onclick = function() {
-//     //    clearInterval(Interval);
-//     //   tens = "00";
-//     //     seconds = "00";
-//     //   appendTens.innerHTML = tens;
-//     //     appendSeconds.innerHTML = seconds;
-//     // }
-    
-     
-    
-//     function startTimer () {
-//       tens++; 
-      
-//       if(tens < 9){
-//         appendTens.innerHTML = "0" + tens;
-//       }
-      
-//       if (tens > 9){
-//         appendTens.innerHTML = tens;
-        
-//       } 
-      
-//       if (tens > 99) {
-//         //console.log("seconds");
-//         seconds++;
-//         appendSeconds.innerHTML = "0" + seconds;
-//         tens = 0;
-//         appendTens.innerHTML = "0" + 0;
-//       }
-      
-//       if (seconds > 9){
-//         appendSeconds.innerHTML = seconds;
-//       }
-//     //   console.log(seconds);
-//     //   console.log(tens);
-
-      
-    
-//     }
-    
-  
-//   }
-
+//  On Load function
 
  $(function(){
     init();
