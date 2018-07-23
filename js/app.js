@@ -71,7 +71,7 @@ function reset(){
     $(".deck").html("");
     $(".stars").html("");
     $(".moves").html(`<span class="moves" id="points">0</span>`);
-    $(".star-points").html(`<span class="star-points" id="starPoints">3</span>`);
+    $(".star-points").html(`<span>3</span>`);
     $(".time-seconds").html(`<span class="time-seconds" id="timeSec">0</span>`);
     openCards = [];
     matchCount = 0;
@@ -119,7 +119,7 @@ function reset(){
                  openCards.forEach(function(card){
                      card.toggleClass("redEffect animated swing");
                      setTimeout(function(){
-                         card.toggleClass("show animated swing");
+                         card.toggleClass("redEffect show animated swing");
                      }, 600);
                  });
              }
