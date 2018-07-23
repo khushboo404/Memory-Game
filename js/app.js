@@ -24,6 +24,8 @@
 
  let starCounter;
 
+ let starPoints
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -144,12 +146,13 @@ function reset(){
         //  If all card matches, call Congrats function
 
         function congrats(){
+            let val = $(".fa-star").length;
             secCounter = document.getElementById("score-card-sec");
             $("#score-card-sec").html(secCount);
             moveCounter = document.getElementById("score-card-moves");
             $("#score-card-moves").html(moveCount);
             starCounter = document.getElementById("score-card-star");
-            $("#score-card-star").html(starPoints);
+            $("#score-card-star").html(val);
             $('#congratsModal').modal('toggle');
             stopTimer();
         }
@@ -157,7 +160,7 @@ function reset(){
         // Reduce points if moves are greater than 16 | 20
 
         function reducePoints(){
-            let starPoints = document.getElementById("starPoints");
+            starPoints = document.getElementById("starPoints");
             let stars = $(".fa-star");
             $(stars[stars.length-1]).toggleClass("fa-star fa-star-o");
             starPoints.innerHTML = $(".fa-star").length;
