@@ -33,18 +33,18 @@ h1 {
     text-transform: uppercase;
 }
 
-header h1{
+header h1 {
     margin-bottom: 30px;
     font-family: Impact, Charcoal, sans-serif;
     margin-left: 230px;
     margin-top: 20px;
 }
 
-.row .col-md-4{
+.row .col-md-4 {
     widows: 30%;
 }
 
-.row .col-md-4{
+.row .col-md-4 {
     widows: 70%;
 }
 
@@ -117,7 +117,7 @@ header h1{
     color: rgb(50, 205, 50)
 }
 
-.score-panel h2{
+.score-panel h2 {
     font-family: Impact, Charcoal, sans-serif;
     text-transform: uppercase;
 }
@@ -132,53 +132,93 @@ header h1{
     font-size: 25px;
 }
 
-.star-points{
+.star-points {
     font-size: 25px;
 }
 
-.star-points-text{
+.star-points-text {
     font-size: 25px;
 }
 
-.moves{
+.moves {
     font-size: 25px;
 }
 
-.moves-text{
+.moves-text {
     font-size: 25px;
 }
 
-.restart button{
+.restart button {
     width: 65px;
     box-shadow: 5px 5px brown;
     transform: translateY(4px);
 }
 
-button .fa-repeat{
+button .fa-repeat {
     font-size: 25px;
 }
 
-.red{
+.redEffect {
     background-color: red;
+}
+
+.score-card-content {
+    color: grey;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-weight: 200;
+    font-size: 18px;
+}
+
+#score-card-sec {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.score-card-text {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+#score-card-moves,
+#score-card-star {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/* #score-card-star {
+    font-size: 1.2em;
+    font-weight: 600;
+} */
+
+.help-section {
+    margin-top: 20px;
+}
+
+.help-section button {
+    border-radius: 25%;
+}
+
+button .fa-question-circle {
+    font-size: 40px;
 }
 
 /* Timer */
 
-.timer-section{
+.timer-section {
     float: right;
 }
 
-.timeCounter{
+.timeCounter {
     margin-top: 20px;
     font-size: 35px;
     font-weight: 600;
 }
 
-.startCountDown{
+.startCountDown {
     margin-top: 20px;
 }
 
-.startCountDown button{
+.startCountDown button {
     box-shadow: 5px 5px lightseagreen;
     transform: translateY(4px);
     font-size: 25px;
@@ -187,37 +227,31 @@ button .fa-repeat{
 
 /* modal */
 
-.modal-title{
+.modal-title, .score-card-title {
     font-size: 1.8em;
     color: lightseagreen;
     text-transform: uppercase;
 }
-.item-menu-details{
-    font-size: 1.2em;
-    font-weight: 600;
+.item-menu-details {
+    color: grey;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-weight: 200;
+    font-size: 18px;
 }
 
-.score-card-content{
-    font-size: 1.2em;
-    font-weight: 600;
+#helpModal {
+    color: grey;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-#score-card-sec{
-    font-size: 1.2em;
-    font-weight: 600;
+.aboutGame {
+    font-weight: 200;
 }
 
-.score-card-text{
-    font-size: 1.2em;
-    font-weight: 600;
+.rules {
+    font-weight: 200;
 }
 
-#score-card-moves{
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-#score-card-star{
-    font-size: 1.2em;
+.help-subHeading {
     font-weight: 600;
 }
