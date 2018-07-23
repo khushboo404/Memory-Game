@@ -38,6 +38,11 @@
                     <div class="timeCounter">
                         <span class="time-seconds" id="timeSec">0</span><span class="time-seconds-text"> Sec</span>
                     </div>
+                    <div class="help-section">
+                        <button type="button" class="btn btn-success" onclick="helpUser()" data-toggle = "tooltip" title="HELP" data-placement="left">
+                            <i class="fa fa-question-circle"></i>
+                        </button>
+                    </div>
                 </section>
             </div>
             <div class="col-md-8">
@@ -45,36 +50,95 @@
             </div>
         </div>
         <div class="modal fade" id="congratsModal" tabindex="-1" role="dialog" aria-labelledby="congratsModal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Congratulations!</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="reset()">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
                         <div class="item-menu-container">
-                            <div class="item-menu-details">
-                                Congratulations! You did very well. Hope you had a better experience this time. If not, PLAY AGAIN :)
-                            </div>
-                            <div class="score-card-title">
-                                <h2 class="modal-header modal-title">Score card</h2>
+                            <p class="score-card-content">
+                                Congratulations! You did very well. Hope you had a better experience this time. IF NOT
+                            </p>
+                            <span>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reset()">PLAY AGAIN</button>
+                            </span>
+                            <p>
+                                <h2 class="score-card-title">Score card</h2>
+                            </p>
+                            <div class="score-card-content">
+                               You have completed your game in <span id="score-card-sec"></span><span class="score-card-text"> Seconds</span> 
                             </div>
                             <div class="score-card-content">
-                               You have completed your game in - <span id="score-card-sec"></span><span class="score-card-text"> Seconds</span> 
+                                You have taken total <span id="score-card-moves"></span><span class="score-card-text"> Moves</span> 
                             </div>
                             <div class="score-card-content">
-                                Your total moves are - <span id="score-card-moves"></span><span class="score-card-text"> Moves</span> 
-                            </div>
-                            <div class="score-card-content">
-                               You got : <span id="score-card-star">3</span><span class="score-card-text"> Stars</span> 
+                               You got <span id="score-card-star">3</span><span class="score-card-text"> Stars</span> 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">How to Play?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="reset()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="item-menu-container">
+                        <div class="item-menu-details">
+                            <p class="help-subHeading">
+                                Memory Game is a browser-based card matching game (also known as Concentration)
+                            </p>
+                            <p class="aboutGame">
+                                The game board consists of sixteen "cards" arranged in a grid. The deck is made up of eight different pairs of cards, each with different symbols on one side. The cards are arranged randomly on the grid with the symbol face down. Flip over two hidden cards at a time to locate the ones that match!
+                            </p>
+                            <p class="help-subHeading">
+                                How it works?
+                            </p>
+                            <ul class="ruleSet">
+                                <li class="rules">
+                                    The player flips one card over to reveal its underlying symbol.
+                                </li>
+                                <li class="rules">
+                                    The player then turns over a second card, trying to find the corresponding card with the same symbol.
+                                </li>
+                                <li class="rules">
+                                    If the cards match, both cards stay flipped over.
+                                </li>
+                                <li class="rules">
+                                    If the cards do not match, both cards are flipped face down.
+                                </li>
+                            </ul>
+                            <p class="help-subHeading">Look Out Below</p>
+                            <ul class="ruleSet">
+                                <li class="rules">
+                                    Timer will start the moment you will click on deck of cards. So watch out your efficiency.
+                                </li>
+                                <li class="rules">
+                                    If you have taken more than 16 moves to complete the game, then you will loose one star.
+                                </li>
+                                <li class="rules">
+                                    If you have taken more than 20 moves to complete the game, then you will loose another star.
+                                </li>
+                                <li class="rules">
+                                    You can reset your game at any point.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vex-js/4.1.0/js/vex.combined.min.js"></script>
