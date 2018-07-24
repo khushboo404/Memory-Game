@@ -45,11 +45,11 @@ header h1 {
 }
 
 .row .col-md-4 {
-    widows: 30%;
+    width: 30%;
 }
 
-.row .col-md-4 {
-    widows: 70%;
+.row .col-md-8 {
+    width: 70%;
 }
 
 /*
