@@ -3,7 +3,7 @@
 Main Sections of WebApp:
 
 Hosted at : https://khushboo404.github.io/Memory-Game/
-Demo Link : youtu.be/Sv5mimholaw 
+Demo Link : youtu.be/Sv5mimholaw
 
 # About Memory Game:
 
